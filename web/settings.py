@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'chexo_app.apps.Chexo_appConfig",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

@@ -1,3 +1,5 @@
 from django.contrib import admin
+from .models import DojoList, MemberList
 
-# Register your models here.
+admin.site.register(DojoList)
+admin.site.register(MemberList)

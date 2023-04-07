@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div>
+    <div>
+        <div>
+            <h3>Edit list:</h3>
+            <h5>{{ dojo_list.dojo | upper }}</h5>
+        </div>
+        <ul>
+            {% for member in object_list %}
+            <li>
+                <div>
+                    <div
+                        role="button"
+                        onclick="location.href='#'">
+                        {{ member.name }}
+                    </div>
+                </div>
+            </li>
+            {% empty %}
+            <p>There are no to-do items in this list.</p>
+            {% endfor %}
+        </ul>
+        <p>
+            <input
+                value="Add a new member"
+                type="button"
+                onclick="location.href='#'" />
+        </p>
+    </div>
+</div>
+{% endblock %}

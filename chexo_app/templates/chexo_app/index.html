@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if object_list %}
+
+{% endif %}
+
+<ul>
+    {% for dojolist in object_list %}
+    <li>
+        <div
+            role="button"
+            onclick="location.href='{% url "list" dojolist.id %}'">
+            {{ dojolist.dojo_name }} 
+        </div>
+    </li>
+    {% empty %}
+    <h4>You have no lists!</h4>
+    {% endfor %}
+</ul>
+
+{% endblock content %}

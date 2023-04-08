@@ -18,3 +18,13 @@ class MemberListView(generic.ListView):
         context = super().get_context_data()
         context["dojo_list"] = MemberList.objects.get(id=self.kwargs["list_id"])
         return context
+
+class ListCreate(generic.CreateView):
+    model = DojoList
+    fields = ["dojo_name"]
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = "Add a new Dojo"
+        return context
+    

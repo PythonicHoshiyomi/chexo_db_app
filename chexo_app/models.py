@@ -15,6 +15,9 @@ class MemberList(models.Model):
     birth_date = models.DateField()
     dojo = models.ForeignKey(DojoList, on_delete=models.CASCADE)
     kyu = models.IntegerField(default=8)
+
+    def get_absolute_url(self):
+        return
     
     def __str__(self) -> str:
         return f"Name: {self.name}, Dojo: {self.dojo}, Kyu: {self.kyu}"

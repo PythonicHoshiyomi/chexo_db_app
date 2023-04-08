@@ -19,5 +19,7 @@
     <h4>You have no lists!</h4>
     {% endfor %}
 </ul>
-
+<p>
+        <input value="Add a new Dojo" type="button" onclick="location.href='{% url "dojo-add" %}'" />
+</p>
 {% endblock content %}

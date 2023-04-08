@@ -8,7 +8,24 @@
             <h5>{{ dojo_list.dojo | upper }}</h5>
         </div>
         <ul>
-            {% for member in object_list %}
+            <table>
+                {% if object_list %}
+                <th>Name</th>
+                <th>Birth Date</th>
+                <th>Kyu</th>
+                {% endif %}
+                
+                {% for member in object_list %}
+                    <tr>
+                        <td>{{member.name}}</td>
+                        <td>{{member.birth_date}}</td>
+                        <td>{{member.kyu}}</td>
+                    </tr>
+                {%empty %}
+                    <p>You have no member</p>
+                {% endfor %}
+            </table>
+                {% comment %} {% for member in object_list %}
             <li>
                 <div>
                     <div
@@ -19,8 +36,8 @@
                 </div>
             </li>
             {% empty %}
-            <p>There are no to-do items in this list.</p>
-            {% endfor %}
+            <p>td are no to-do items in td list.</p>
+            {% endfor %} {% endcomment %}
         </ul>
         <p>
             <input

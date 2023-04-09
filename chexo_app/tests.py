@@ -30,7 +30,7 @@ class DojoIndexViewTests(TestCase):
         If no member exists, an appropriate message is displayed
         """
         dojo = create_dojo("test")
-        response = self.client.get(dojo.pk)
+        response = self.client.get(dojo.get_absolute_url())
         self.assertEqual(response.status_code, 200)
         self.assertContains(response=response, text="You have no member")
         self.assertQuerysetEqual(response.context['object_list'], [])

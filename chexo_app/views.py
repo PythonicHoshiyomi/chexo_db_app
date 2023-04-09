@@ -16,7 +16,7 @@ class MemberListView(generic.ListView):
 
     def get_context_data(self):
         context = super().get_context_data()
-        context["dojo_list"] = MemberList.objects.get(id=self.kwargs["list_id"])
+        context["dojo_list"] = DojoList.objects.get(id=self.kwargs["list_id"])
         return context
 
 class ListCreate(generic.CreateView):

@@ -11,6 +11,13 @@
     <input
         value="Submit"
         type="submit">
+{% if object %}
+    <input
+        value="Delete this item"
+        type="button"
+        onclick="location.href=
+        '{% url "member-delete" dojo.id object.id %}'">
+{% endif %}
     <input
         value="Cancel"
         type="button"

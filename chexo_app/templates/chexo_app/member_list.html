@@ -32,6 +32,11 @@
                 value="Add a new member"
                 type="button"
                 onclick="location.href='{% url "member-add" dojo_list.id %}'" />
+            <input
+                value="Delete this list"
+                type="button"
+                onclick="location.href=
+                '{% url "dojo-delete" dojo_list.pk %}'" />
         </p>
     </div>
 </div>

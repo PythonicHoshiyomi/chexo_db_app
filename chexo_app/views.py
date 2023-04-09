@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from .models import MemberList, DojoList
 from django.views import generic
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 
 class ListListView(generic.ListView):
     model = DojoList 
@@ -62,8 +62,8 @@ class MemberUpdate(generic.UpdateView):
         "kyu",
     ]
 
-    def get_context_data(self):
-        context = super().get_context_data()
+    def get_context_data(self,**kwargs):
+        context = super().get_context_data(**kwargs)
         context["dojo"] = self.object.dojo
         context["title"] = "Edit member"
         return context
@@ -75,10 +75,25 @@ class DojoUpdate(generic.UpdateView):
     model = DojoList
     fields = ["dojo_name"]
 
-    def get_context_data(self):
-        context = super().get_context_data()
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
         context["title"] = "Edit Dojo name"
         return context 
 
     def get_success_url(self) -> str:
         return reverse("list", args=[self.object.id])
+
+class DojoDelete(generic.DeleteView):
+    model = DojoList
+    success_url = reverse_lazy("index")
+
+class MemberDelete(generic.DeleteView):
+    model = MemberList
+
+    def get_success_url(self) -> str:
+        return reverse_lazy("list", args=[self.kwargs["list_id"]])
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["dojo"] = self.object.dojo
+        return context

@@ -5,7 +5,7 @@
     <div>
         <div>
             <h3>Edit list:</h3>
-            <h5>{{ dojo_list.dojo_name | upper }}</h5>
+            <h5 onclick="location.href='{% url 'dojo-update' dojo_list.id%}'">{{ dojo_list.dojo_name | upper }}</h5>
         </div>
         <ul>
             <table>
@@ -16,7 +16,8 @@
                 {% endif %}
                 
                 {% for member in object_list %}
-                    <tr>
+                    <tr
+                     onclick="location.href='{% url "member-update" dojo_list.id member.id%}'">
                         <td>{{member.name}}</td>
                         <td>{{member.birth_date}}</td>
                         <td>{{member.kyu}}</td>
@@ -30,7 +31,7 @@
             <input
                 value="Add a new member"
                 type="button"
-                onclick="location.href='#'" />
+                onclick="location.href='{% url "member-add" dojo_list.id %}'" />
         </p>
     </div>
 </div>

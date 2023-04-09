@@ -5,6 +5,9 @@ from .models import DojoList, MemberList
 def create_dojo(dojo_name: str):
     return DojoList.objects.create(dojo_name=dojo_name)
 
+def create_member(name, birth_date, kyu, dojo):
+    return dojo.memberlist_set.create(name=name, birth_date=birth_date, kyu=kyu)
+
 class DojoIndexViewTests(TestCase):
 
     def test_no_dojo(self):
@@ -34,3 +37,13 @@ class DojoIndexViewTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response=response, text="You have no member")
         self.assertQuerysetEqual(response.context['object_list'], [])
+
+    def test_create_a_member(self):
+        """
+        New member is displayed on the Dojo list
+        """
+        dojo = create_dojo("test dojo")
+        member = create_member("Test", "2001-01-01", 8, dojo)
+        response = self.client.get(dojo.get_absolute_url())
+        self.assertEqual(response.status_code, 200)
+        self.assertQuerysetEqual(response.context['object_list'], [member])

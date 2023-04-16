@@ -107,13 +107,49 @@ def getMember(request,id):
     serializer = MemberSerializer(member)
     return Response(serializer.data)
 
+@api_view(['POST'])
 def addMember(request, dojo_id):
     data = request.data
     member = Member.objects.create(
-        dojo_id=dojo_id, 
+        dojo_id=dojo_id,
         name=data['name'],
         birth_date=data['birth_date'],
         kyu=data['kyu']
         )
     serializer = MemberSerializer(member)
     return Response(serializer.data)
+
+@api_view(['PUT'])
+def updateDojo(request, pk):
+    data = request.data
+    dojo = Dojo.objects.get(pk=pk)
+    serializer = DojoSerializer(dojo, data)
+    if serializer.is_valid():
+        serializer.save()
+
+    return Response(serializer.data)
+
+@api_view(['PUT'])
+def updateMember(request,dojo_id, pk):
+    data = request.data
+    member = Member.objects.get(dojo_id=dojo_id, pk=pk)
+    serializer = MemberSerializer(member, data)
+    if serializer.is_valid():
+        serializer.save()
+
+    return Response(serializer.data)
+
+@api_view(['DELETE'])
+def deleteDojo(request,dojo_id):
+    dojo = Dojo.objects.get(id=dojo_id)
+    dojo.delete()
+
+    return Response("Dojo deleted")
+
+
+@api_view(['DELETE'])
+def deleteMember(request, dojo_id, pk):
+    member = Member.objects.get(dojo_id=dojo_id, pk=pk)
+    member.delete()
+
+    return Response("Member deleted")

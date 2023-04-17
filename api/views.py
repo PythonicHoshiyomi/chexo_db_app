@@ -1,7 +1,7 @@
 from rest_framework.decorators import api_view
 from rest_framework.views import Response
 from .serializers import DojoSerializer, MemberSerializer
-from .models import Dojo, Member
+from chexo_app.models import DojoList, MemberList
 
 
 @api_view(['GET'])
@@ -76,14 +76,14 @@ def getRoutes(requests):
 
 @api_view(['GET'])
 def getDojos(request):
-    dojos = Dojo.objects.all()
+    dojos = DojoList.objects.all()
     serializer = DojoSerializer(dojos, many=True)
     return Response(serializer.data)
 
 
 @api_view(['GET'])
 def getDojo(request, dojo_id):
-    dojo = Dojo.objects.get(id=dojo_id)
+    dojo = DojoList.objects.get(id=dojo_id)
     serializer = DojoSerializer(dojo)
     return Response(serializer.data)
 
@@ -91,26 +91,26 @@ def getDojo(request, dojo_id):
 @api_view(['POST'])
 def createDojo(request):
     data = request.data
-    dojo = Dojo.objects.create(dojo_name=data['dojo_name'])
+    dojo = DojoList.objects.create(dojo_name=data['dojo_name'])
     serializer = DojoSerializer(dojo)
     return Response(serializer.data)
 
 @api_view(['GET'])
 def getDojoMembers(request, dojo_id):
-    members = Member.objects.filter(dojo_id=dojo_id)
+    members = MemberList.objects.filter(dojo_id=dojo_id)
     serializer = MemberSerializer(members, many=True)
     return Response(serializer.data)
 
 @api_view(['GET'])
 def getMember(request,id):
-    member = Member.objects.get(id=id)
+    member = MemberList.objects.get(id=id)
     serializer = MemberSerializer(member)
     return Response(serializer.data)
 
 @api_view(['POST'])
 def addMember(request, dojo_id):
     data = request.data
-    member = Member.objects.create(
+    member = MemberList.objects.create(
         dojo_id=dojo_id,
         name=data['name'],
         birth_date=data['birth_date'],
@@ -122,7 +122,7 @@ def addMember(request, dojo_id):
 @api_view(['PUT'])
 def updateDojo(request, pk):
     data = request.data
-    dojo = Dojo.objects.get(pk=pk)
+    dojo = DojoList.objects.get(pk=pk)
     serializer = DojoSerializer(dojo, data)
     if serializer.is_valid():
         serializer.save()
@@ -132,7 +132,7 @@ def updateDojo(request, pk):
 @api_view(['PUT'])
 def updateMember(request,dojo_id, pk):
     data = request.data
-    member = Member.objects.get(dojo_id=dojo_id, pk=pk)
+    member = MemberList.objects.get(dojo_id=dojo_id, pk=pk)
     serializer = MemberSerializer(member, data)
     if serializer.is_valid():
         serializer.save()
@@ -141,7 +141,7 @@ def updateMember(request,dojo_id, pk):
 
 @api_view(['DELETE'])
 def deleteDojo(request,dojo_id):
-    dojo = Dojo.objects.get(id=dojo_id)
+    dojo = DojoList.objects.get(id=dojo_id)
     dojo.delete()
 
     return Response("Dojo deleted")
@@ -149,7 +149,7 @@ def deleteDojo(request,dojo_id):
 
 @api_view(['DELETE'])
 def deleteMember(request, dojo_id, pk):
-    member = Member.objects.get(dojo_id=dojo_id, pk=pk)
+    member = MemberList.objects.get(dojo_id=dojo_id, pk=pk)
     member.delete()
 
     return Response("Member deleted")

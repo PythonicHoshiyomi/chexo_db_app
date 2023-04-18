@@ -1,8 +1,10 @@
 <p>
     <img src="assets/406ceaf8b409a4f3e1bacef2cd084592.gif">
 </p>
-![main workflow test](https://github.com/GizaJ0811/chexo_db_app/actions/workflows/django.yml/badge.svg)
+
+![main workflow test](https://github.com/GizaJ0811/chexo_db_app/actions/workflows/django.yml/badge.svg?)
 ![API workflow test](https://github.com/GizaJ0811/chexo_db_app/actions/workflows/django.yml/badge.svg?branch=api)
+
 # Chexo'z database web app
 A web application for managing Chexoz's karate dojo member
 

@@ -4,7 +4,8 @@ from chexo_app.models import DojoList, MemberList
 class DojoSerializer(serializers.ModelSerializer):
     class Meta:
         model = DojoList
-        fields = ['dojo_name',
+        fields = ['id',
+                  'dojo_name',
                   'member_list']
 
 class MemberSerializer(serializers.ModelSerializer):

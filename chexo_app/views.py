@@ -1,11 +1,12 @@
-from django.shortcuts import render
 from .models import MemberList, DojoList
 from django.views import generic
 from django.urls import reverse, reverse_lazy
 
+
 class ListListView(generic.ListView):
-    model = DojoList 
+    model = DojoList
     template_name = "chexo_app/index.html"
+
 
 class MemberListView(generic.ListView):
     model = MemberList
@@ -19,6 +20,7 @@ class MemberListView(generic.ListView):
         context["dojo_list"] = DojoList.objects.get(id=self.kwargs["list_id"])
         return context
 
+
 class ListCreate(generic.CreateView):
     model = DojoList
     fields = ["dojo_name"]
@@ -27,7 +29,8 @@ class ListCreate(generic.CreateView):
         context = super().get_context_data(**kwargs)
         context["title"] = "Add a new Dojo"
         return context
-    
+
+
 class MemberCreate(generic.CreateView):
     model = MemberList
     fields = [
@@ -42,7 +45,7 @@ class MemberCreate(generic.CreateView):
         dojo = DojoList.objects.get(id=self.kwargs["list_id"])
         initial_data["dojo"] = dojo
         return initial_data
-    
+
     def get_context_data(self):
         context = super().get_context_data()
         dojo = DojoList.objects.get(id=self.kwargs["list_id"])
@@ -53,6 +56,7 @@ class MemberCreate(generic.CreateView):
     def get_success_url(self) -> str:
         return reverse("list", args=[self.object.dojo_id])
 
+
 class MemberUpdate(generic.UpdateView):
     model = MemberList
     fields = [
@@ -62,7 +66,7 @@ class MemberUpdate(generic.UpdateView):
         "kyu",
     ]
 
-    def get_context_data(self,**kwargs):
+    def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["dojo"] = self.object.dojo
         context["title"] = "Edit member"
@@ -71,6 +75,7 @@ class MemberUpdate(generic.UpdateView):
     def get_success_url(self) -> str:
         return reverse("list", args=[self.object.dojo_id])
 
+
 class DojoUpdate(generic.UpdateView):
     model = DojoList
     fields = ["dojo_name"]
@@ -78,14 +83,16 @@ class DojoUpdate(generic.UpdateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["title"] = "Edit Dojo name"
-        return context 
+        return context
 
     def get_success_url(self) -> str:
         return reverse("list", args=[self.object.id])
 
+
 class DojoDelete(generic.DeleteView):
     model = DojoList
     success_url = reverse_lazy("index")
+
 
 class MemberDelete(generic.DeleteView):
     model = MemberList

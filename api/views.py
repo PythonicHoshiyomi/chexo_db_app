@@ -14,13 +14,13 @@ def getRoutes(requests):
             'description': 'Returns an array of dojo'
         },
         {
-            'url': 'dojo/<int:dojo_id>/',
+            'url': 'dojos/<int:dojo_id>/',
             'method': 'GET',
             'body': None,
             'description': 'Returns an array of single dojo'
         },
         {
-            'url': 'dojo/add/',
+            'url': 'dojos/add/',
             'method': 'POST',
             'body': {
                 "dojo_name": ""
@@ -28,13 +28,13 @@ def getRoutes(requests):
             'description': 'Creates a dojo'
         },
         {
-            'url': 'dojo/<int:pk>/delete/',
+            'url': 'dojos/<int:pk>/delete/',
             'method': 'DELETE',
             'body': None,
             'description': 'Deletes a dojo'
         },
         {
-            'url': 'dojo/<int:pk>/update/',
+            'url': 'dojos/<int:pk>/update/',
             'method': 'PUT',
             'body': {
                 'dojo_name': ''
@@ -42,7 +42,7 @@ def getRoutes(requests):
             'description': 'Updates a dojo name'
         },
         {
-            'url': 'dojo/<int:dojo_id>/add/',
+            'url': 'dojos/<int:dojo_id>/add/',
             'method': 'POST',
             'body': {
                 'dojo_id': '',
@@ -53,7 +53,7 @@ def getRoutes(requests):
             'description': 'Creates a member of a dojo'
         },
         {
-            'url': 'dojo/<int:dojo_id>/member/<int:pk>/',
+            'url': 'dojos/<int:dojo_id>/members/<int:pk>/',
             'method': 'PUT',
             'body': {
                 'dojo': '',
@@ -64,7 +64,7 @@ def getRoutes(requests):
             'description': 'Updates a member of a dojo'
         },
         {
-            'url': 'dojo/<int:dojo_id>/member/<int:pk>/delete/',
+            'url': 'dojos/<int:dojo_id>/members/<int:pk>/delete/',
             'method': 'DELETE',
             'body': None,
             'description': 'Deletes a member of a dojo'
